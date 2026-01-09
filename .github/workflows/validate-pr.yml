@@ -1,0 +1,96 @@
+name: Validate PR
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  validate-index:
+    name: Validate Registry Index
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install jsonschema
+
+      - name: Validate index.json
+        run: |
+          python scripts/validate-index.py
+
+  validate-packages:
+    name: Validate Package Metadata
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package:
+          - example-security
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install jsonschema toml
+
+      - name: Validate package
+        run: |
+          python scripts/validate-package.py packages/${{ matrix.package }}
+
+  check-links:
+    name: Check Documentation Links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for broken links
+        run: |
+          # Extract URLs from index.json
+          urls=$(python3 -c "
+          import json
+          with open('index.json') as f:
+              data = json.load(f)
+          for v in data['verticals']:
+              print(v.get('homepage', ''))
+              print(v.get('repository', ''))
+              print(v.get('documentation', ''))
+          " | grep -v '^$')
+
+          # Check each URL
+          for url in $urls; do
+            echo "Checking $url"
+            if ! curl -f -s -o /dev/null "$url"; then
+              echo "FAIL: $url is not accessible"
+              exit 1
+            fi
+          done
+          echo "All links are accessible"
+
+  lint-markdown:
+    name: Lint Markdown Files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Lint markdown with markdownlint
+        uses: articulate/actions-markdownlint@v1
+        with:
+          config: .markdownlint.json
+          ignore: node_modules
