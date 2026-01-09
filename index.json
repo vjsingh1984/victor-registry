@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2025-01-09T00:00:00Z",
+  "verticals": [
+    {
+      "name": "example-security",
+      "version": "1.0.0",
+      "description": "Example security vertical for demonstration purposes",
+      "author": "Vijaykumar Singh",
+      "license": "Apache-2.0",
+      "homepage": "https://github.com/vjsingh1984/victor-registry",
+      "repository": "https://github.com/vjsingh1984/victor-registry",
+      "documentation": "https://github.com/vjsingh1984/victor-registry/tree/main/packages/example-security",
+      "python_package": null,
+      "category": "example",
+      "tags": ["example", "security", "demo"],
+      "requires_victor": ">=0.5.0",
+      "registry_entry": "packages/example-security",
+      "download_count": 0,
+      "star_count": 0,
+      "last_updated": "2025-01-09T00:00:00Z",
+      "verified": false,
+      "featured": false
+    }
+  ],
+  "statistics": {
+    "total_verticals": 1,
+    "categories": {
+      "example": 1
+    },
+    "last_sync": "2025-01-09T00:00:00Z"
+  }
+}

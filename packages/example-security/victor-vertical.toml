@@ -1,0 +1,61 @@
+[vertical]
+name = "example-security"
+version = "1.0.0"
+description = "Example security vertical for demonstration purposes - showcases security analysis tools and workflows"
+authors = [
+    {name = "Vijaykumar Singh", email = "singhvjd@gmail.com"}
+]
+license = "Apache-2.0"
+requires_victor = ">=0.5.0"
+
+# python_package = "victor-example-security"  # Not published on PyPI
+homepage = "https://github.com/vjsingh1984/victor-registry"
+repository = "https://github.com/vjsingh1984/victor-registry"
+documentation = "https://github.com/vjsingh1984/victor-registry/tree/main/packages/example-security"
+issues = "https://github.com/vjsingh1984/victor-registry/issues"
+
+category = "example"
+tags = ["example", "security", "demo", "sast", "vulnerability"]
+
+[vertical.class]
+module = "victor_example_security"
+class_name = "ExampleSecurityVertical"
+provides_tools = [
+    "security_scan",
+    "vulnerability_check",
+    "dependency_audit",
+]
+provides_workflows = [
+    "security_review",
+    "vulnerability_assessment",
+]
+provides_capabilities = [
+    "sast",
+    "dependency_scanning",
+    "security_reporting",
+]
+
+[vertical.dependencies]
+python = [
+    "requests>=2.31.0",
+    "pyyaml>=6.0",
+    "packaging>=23.0",
+]
+verticals = []
+
+[vertical.compatibility]
+requires_tool_calling = true
+preferred_providers = ["anthropic", "openai", "google"]
+min_context_window = 100000
+python_version = ">=3.10"
+
+[vertical.security]
+signed = false
+verified_author = false
+permissions = [
+    "filesystem:read",
+    "network",
+]
+
+[vertical.installation]
+install_command = "pip install victor-example-security"

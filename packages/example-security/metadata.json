@@ -1,0 +1,32 @@
+{
+  "name": "example-security",
+  "status": "active",
+  "verified": false,
+  "featured": false,
+  "maintainer": {
+    "name": "Vijaykumar Singh",
+    "github": "vjsingh1984",
+    "email": "singhvjd@gmail.com"
+  },
+  "links": {
+    "github": "https://github.com/vjsingh1984/victor-registry",
+    "documentation": "https://github.com/vjsingh1984/victor-registry/tree/main/packages/example-security"
+  },
+  "statistics": {
+    "downloads": 0,
+    "stars": 0,
+    "last_commit": "2025-01-09T00:00:00Z",
+    "first_published": "2025-01-09T00:00:00Z"
+  },
+  "reviews": {
+    "count": 0,
+    "average_rating": 0.0
+  },
+  "quality": {
+    "documentation_score": 5,
+    "code_quality_score": 5,
+    "security_score": 5,
+    "maintainability_score": 5
+  },
+  "notes": "This is an example package for demonstration purposes only. It is not a functional vertical package."
+}
